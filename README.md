@@ -1,0 +1,3 @@
+# CoreDataDemo
+A simply  CoreData demo
+to be continued...
