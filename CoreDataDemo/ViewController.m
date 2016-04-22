@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "LFZDataController.h"
+#import "Person.h"
+#import "NSManagedObject+Additions.h"
 
 @interface ViewController ()
 
@@ -22,6 +24,14 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.dataController = [LFZDataController standardController];
+    
+    Person *person = [Person lfz_insertNewObjectInManagedObjectContext:self.dataController.managedObjectContext];
+    
+    person.name = @"张三";
+    person.age = @(24);
+    
+    [self.dataController saveContext];
+    
     
 }
 

@@ -48,7 +48,7 @@
     [self setManagedObjectContext:moc];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"DataModel.sqlite"];
+    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"CoreDataDemo.sqlite"];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSError *error = nil;
@@ -61,6 +61,13 @@
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.YGuan.CoreDataDemo" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)saveContext {
+    NSError *error = nil;
+    if([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
+        abort();
+    }
 }
 
 
