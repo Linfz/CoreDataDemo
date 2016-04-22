@@ -17,4 +17,6 @@
 
 - (void)saveContext;
 
+- (void)deleteObject:(NSManagedObject *)object;
+
 @end

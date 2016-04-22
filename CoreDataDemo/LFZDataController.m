@@ -63,6 +63,13 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (void)deleteObject:(NSManagedObject *)object {
+    id obj = [self.managedObjectContext objectWithID:object.objectID];
+    if (obj) {
+        [self.managedObjectContext deleteObject:obj];
+    }
+}
+
 - (void)saveContext {
     NSError *error = nil;
     if([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
