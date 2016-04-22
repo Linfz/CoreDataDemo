@@ -32,9 +32,7 @@
     
     [self.dataController saveContext];
     
-    [self.dataController deleteObject:person];
     
-    [self.dataController saveContext];
 }
 
 - (void)didReceiveMemoryWarning {
