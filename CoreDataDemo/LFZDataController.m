@@ -7,6 +7,7 @@
 //
 
 #import "LFZDataController.h"
+#import "Time.h"
 
 @interface LFZDataController ()
 
@@ -61,6 +62,18 @@
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.YGuan.CoreDataDemo" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSArray *)loadAllItems {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([Time class])];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"currentTime" ascending:NO];
+    request.sortDescriptors = [NSArray arrayWithObject:sort];
+    [request setPredicate:nil];
+    
+    NSError *error = nil;
+    NSArray *objs = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    return objs;
 }
 
 - (void)deleteObject:(NSManagedObject *)object {

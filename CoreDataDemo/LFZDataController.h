@@ -19,4 +19,6 @@
 
 - (void)deleteObject:(NSManagedObject *)object;
 
+- (NSArray *)loadAllItems;
+
 @end

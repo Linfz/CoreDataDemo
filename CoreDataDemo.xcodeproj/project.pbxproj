@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		580AAC3F1CCBB4D40051130E /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 580AAC3D1CCBB4D40051130E /* Time.m */; };
 		5826FECA1CCA668B00CE48E1 /* NSManagedObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5826FEC91CCA668B00CE48E1 /* NSManagedObject+Additions.m */; };
-		5826FED01CCA6A6600CE48E1 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 5826FECE1CCA6A6600CE48E1 /* Person.m */; };
 		58F1453E1CC9213800649299 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F1453D1CC9213800649299 /* main.m */; };
 		58F145411CC9213800649299 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F145401CC9213800649299 /* AppDelegate.m */; };
 		58F145441CC9213800649299 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F145431CC9213800649299 /* ViewController.m */; };
@@ -20,10 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		580AAC3C1CCBB4D40051130E /* Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time.h; sourceTree = "<group>"; };
+		580AAC3D1CCBB4D40051130E /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
 		5826FEC81CCA668B00CE48E1 /* NSManagedObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Additions.h"; sourceTree = "<group>"; };
 		5826FEC91CCA668B00CE48E1 /* NSManagedObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Additions.m"; sourceTree = "<group>"; };
-		5826FECD1CCA6A6600CE48E1 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		5826FECE1CCA6A6600CE48E1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		58F145391CC9213800649299 /* CoreDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F1453D1CC9213800649299 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		58F1453F1CC9213800649299 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 				58F145571CC9218C00649299 /* LFZDataController.m */,
 				5826FEC81CCA668B00CE48E1 /* NSManagedObject+Additions.h */,
 				5826FEC91CCA668B00CE48E1 /* NSManagedObject+Additions.m */,
-				5826FECD1CCA6A6600CE48E1 /* Person.h */,
-				5826FECE1CCA6A6600CE48E1 /* Person.m */,
+				580AAC3C1CCBB4D40051130E /* Time.h */,
+				580AAC3D1CCBB4D40051130E /* Time.m */,
 				58F145451CC9213800649299 /* Main.storyboard */,
 				58F1454B1CC9213800649299 /* Assets.xcassets */,
 				58F1454D1CC9213800649299 /* LaunchScreen.storyboard */,
@@ -167,9 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580AAC3F1CCBB4D40051130E /* Time.m in Sources */,
 				58F145441CC9213800649299 /* ViewController.m in Sources */,
 				5826FECA1CCA668B00CE48E1 /* NSManagedObject+Additions.m in Sources */,
-				5826FED01CCA6A6600CE48E1 /* Person.m in Sources */,
 				58F145581CC9218C00649299 /* LFZDataController.m in Sources */,
 				58F1454A1CC9213800649299 /* CoreDataDemo.xcdatamodeld in Sources */,
 				58F145411CC9213800649299 /* AppDelegate.m in Sources */,
