@@ -31,11 +31,20 @@ UITableViewDataSource
     [super viewDidLoad];
     self.dataController = [LFZDataController standardController];
     self.dataSource = [NSMutableArray arrayWithArray:[self.dataController loadAllItems]];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    if (self.tableView.editing) {
+        self.tableView.editing = !editing;
+    }else {
+        self.tableView.editing = editing;
+    }
 }
 
 #pragma mark- button action
