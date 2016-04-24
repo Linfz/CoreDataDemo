@@ -79,4 +79,20 @@ UITableViewDataSource
     Time *time = self.dataSource[indexPath.row];
     cell.textLabel.text = time.currentTime.description;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Time *time = self.dataSource[indexPath.row];
+    [self.dataSource removeObject:time];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+    [self.dataController deleteObject:time];
+    [self.dataController saveContext];
+}
+
+
 @end
