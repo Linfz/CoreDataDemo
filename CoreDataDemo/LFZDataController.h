@@ -15,7 +15,7 @@
 
 +(instancetype)standardController;
 
-- (void)saveContext;
+- (void)saveContextSync:(BOOL)sync completion:(void (^)(NSError *error))completion;
 
 - (void)deleteObject:(NSManagedObject *)object;
 

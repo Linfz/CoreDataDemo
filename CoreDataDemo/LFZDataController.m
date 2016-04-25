@@ -12,11 +12,14 @@
 @interface LFZDataController ()
 
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSManagedObjectContext *writeManagedObjectContext;
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
 @implementation LFZDataController
+
+#pragma mark- initialize
 
 +(instancetype)standardController {
     static dispatch_once_t onceToken;
@@ -43,10 +46,14 @@
     NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     NSAssert(mom != nil, @"Error initializing Managed Object Model");
     
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [moc setPersistentStoreCoordinator:psc];
-    [self setManagedObjectContext:moc];
+    self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    
+    self.writeManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [self.writeManagedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    
+    self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [self.managedObjectContext setParentContext:self.writeManagedObjectContext];
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"CoreDataDemo.sqlite"];
@@ -59,10 +66,37 @@
     });
 }
 
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.YGuan.CoreDataDemo" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+#pragma mark- pravite method
+
+- (void(^)())saveWriteContextBlockWithCompletion:(void (^)(NSError *))completion {
+    
+    void (^saveWrite)(void) = ^{
+        NSError *error = nil;
+        if ([self.writeManagedObjectContext save:&error] == NO) {
+            if (completion) {
+                completion(error);
+            }
+        } else {
+            if (completion) {
+                completion(nil);
+            }
+        }
+    };
+    return saveWrite;
 }
+
+
+- (BOOL)managedObjectContextHasChanges:(NSManagedObjectContext *)context {
+    __block BOOL hasChanges;
+    [context performBlockAndWait:^{
+        hasChanges = [context hasChanges];
+    }];
+    
+    return hasChanges;
+}
+
+
+#pragma mark- public method
 
 - (NSArray *)loadAllItems {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([Time class])];
@@ -83,10 +117,33 @@
     }
 }
 
-- (void)saveContext {
-    NSError *error = nil;
-    if([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
-        abort();
+- (void)saveContextSync:(BOOL)sync completion:(void (^)(NSError *error))completion {
+    
+    if ([self managedObjectContextHasChanges:self.managedObjectContext] || [self managedObjectContextHasChanges:self.writeManagedObjectContext]) {
+        [self.managedObjectContext performBlockAndWait:^{
+            NSError *mainContextSaveError = nil;
+            if ([self.managedObjectContext save:&mainContextSaveError] == NO) {
+                if (completion) {
+                    completion(mainContextSaveError);
+                }
+                return;
+            }
+            if ([self managedObjectContextHasChanges:self.writeManagedObjectContext]) {
+                if (sync) {
+                    [self.writeManagedObjectContext performBlockAndWait:[self saveWriteContextBlockWithCompletion:completion]];
+                } else {
+                    [self.writeManagedObjectContext performBlock:[self saveWriteContextBlockWithCompletion:completion]];
+                }
+                return;
+            }
+            if (completion) {
+                completion(nil);
+            }
+        }];
+    } else {
+        if (completion) {
+            completion(nil);
+        }
     }
 }
 

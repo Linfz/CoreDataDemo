@@ -52,12 +52,15 @@ UITableViewDataSource
 - (IBAction)insertNewObject:(id)sender {
     Time *time = [Time lfz_insertNewObjectInManagedObjectContext:self.dataController.managedObjectContext];
     time.currentTime = [NSDate date];
-    [self.dataController saveContext];
     
-    [self.dataSource insertObject:time atIndex:0];
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+    __weak typeof (self) weakSelf = self;
+    [self.dataController saveContextSync:YES completion:^(NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.dataSource insertObject:time atIndex:0];
+        [strongSelf.tableView beginUpdates];
+        [strongSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [strongSelf.tableView endUpdates];
+    }];
 }
 
 #pragma mark- tableView DataSource
@@ -91,7 +94,7 @@ UITableViewDataSource
     [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     [self.dataController deleteObject:time];
-    [self.dataController saveContext];
+    [self.dataController saveContextSync:NO completion:nil];
 }
 
 
