@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		580AAC3F1CCBB4D40051130E /* Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 580AAC3D1CCBB4D40051130E /* Time.m */; };
 		5826FECA1CCA668B00CE48E1 /* NSManagedObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5826FEC91CCA668B00CE48E1 /* NSManagedObject+Additions.m */; };
+		585303C51CCF3EAB00728F55 /* LFZDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585303C41CCF3EAB00728F55 /* LFZDetailViewController.m */; };
 		58F1453E1CC9213800649299 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F1453D1CC9213800649299 /* main.m */; };
 		58F145411CC9213800649299 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F145401CC9213800649299 /* AppDelegate.m */; };
 		58F145441CC9213800649299 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F145431CC9213800649299 /* ViewController.m */; };
@@ -24,6 +25,8 @@
 		580AAC3D1CCBB4D40051130E /* Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time.m; sourceTree = "<group>"; };
 		5826FEC81CCA668B00CE48E1 /* NSManagedObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Additions.h"; sourceTree = "<group>"; };
 		5826FEC91CCA668B00CE48E1 /* NSManagedObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Additions.m"; sourceTree = "<group>"; };
+		585303C31CCF3EAB00728F55 /* LFZDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFZDetailViewController.h; sourceTree = "<group>"; };
+		585303C41CCF3EAB00728F55 /* LFZDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFZDetailViewController.m; sourceTree = "<group>"; };
 		58F145391CC9213800649299 /* CoreDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F1453D1CC9213800649299 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		58F1453F1CC9213800649299 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				58F145401CC9213800649299 /* AppDelegate.m */,
 				58F145421CC9213800649299 /* ViewController.h */,
 				58F145431CC9213800649299 /* ViewController.m */,
+				585303C31CCF3EAB00728F55 /* LFZDetailViewController.h */,
+				585303C41CCF3EAB00728F55 /* LFZDetailViewController.m */,
 				58F145561CC9218C00649299 /* LFZDataController.h */,
 				58F145571CC9218C00649299 /* LFZDataController.m */,
 				5826FEC81CCA668B00CE48E1 /* NSManagedObject+Additions.h */,
@@ -169,6 +174,7 @@
 			files = (
 				580AAC3F1CCBB4D40051130E /* Time.m in Sources */,
 				58F145441CC9213800649299 /* ViewController.m in Sources */,
+				585303C51CCF3EAB00728F55 /* LFZDetailViewController.m in Sources */,
 				5826FECA1CCA668B00CE48E1 /* NSManagedObject+Additions.m in Sources */,
 				58F145581CC9218C00649299 /* LFZDataController.m in Sources */,
 				58F1454A1CC9213800649299 /* CoreDataDemo.xcdatamodeld in Sources */,

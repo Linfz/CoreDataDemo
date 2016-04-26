@@ -10,6 +10,7 @@
 #import "LFZDataController.h"
 #import "Time.h"
 #import "NSManagedObject+Additions.h"
+#import "LFZDetailViewController.h"
 
 @interface ViewController ()
 <
@@ -30,8 +31,13 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataController = [LFZDataController standardController];
-    self.dataSource = [NSMutableArray arrayWithArray:[self.dataController loadAllItems]];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.dataSource = [NSMutableArray arrayWithArray:[self.dataController loadAllItems]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,9 +47,9 @@ UITableViewDataSource
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     if (self.tableView.editing) {
-        self.tableView.editing = !editing;
+        [self.tableView setEditing:!editing animated:YES];
     }else {
-        self.tableView.editing = editing;
+        [self.tableView setEditing:editing animated:YES];
     }
 }
 
@@ -97,5 +103,12 @@ UITableViewDataSource
     [self.dataController saveContextSync:NO completion:nil];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    Time *time = self.dataSource[indexPath.row];
+    LFZDetailViewController *detail = [[LFZDetailViewController alloc] init];
+    detail.time = time;
+    [self.navigationController pushViewController:detail animated:YES];
+}
 
 @end
